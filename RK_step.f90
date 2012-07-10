@@ -1,5 +1,5 @@
 subroutine RK_step(nx,ny,dx,dy,kappa,gamma,dt,rho_floor,&
-          rho,tau,etot,mom_A,mom_B,mom_x,mom_y,phi,x,y,flux_in,alpha,recons)
+          rho,tau,etot,mom_A,mom_B,mom_x,mom_y,phi,x,y,flux_in,alpha,recons,omega_grid)
   implicit none
   include 'variables.h'
   double precision :: rho(nx,ny),tau(nx,ny),etot(nx,ny)
@@ -12,6 +12,7 @@ subroutine RK_step(nx,ny,dx,dy,kappa,gamma,dt,rho_floor,&
   double precision :: beta,r(nx,ny),theta(nx,ny),e_internal(nx,ny)
   double precision :: Floor_plus_tot,flux_out,flux_in
   double precision :: alpha
+  double precision :: omega_grid
   integer :: recons
 !  print*,nx,ny
  
@@ -29,20 +30,20 @@ subroutine RK_step(nx,ny,dx,dy,kappa,gamma,dt,rho_floor,&
   beta = 1d0
   call RK_substep(nx,ny,dx,dy,kappa,gamma,dt,beta,rho_floor,&
        rho,tau,etot,mom_A,mom_B,mom_x,mom_y,x,y,phi,&
-       rho_0,tau_0,etot_0,mom_A_0,mom_B_0,mom_x_0,mom_y_0,flux_out,recons)
+       rho_0,tau_0,etot_0,mom_A_0,mom_B_0,mom_x_0,mom_y_0,flux_out,recons,omega_grid)
   call momentum_sync(nx,ny,mom_A,mom_B,mom_x,mom_y,x,y,alpha)
   
   beta = 0.25d0
   call RK_substep(nx,ny,dx,dy,kappa,gamma,dt,beta,rho_floor,&
        rho,tau,etot,mom_A,mom_B,mom_x,mom_y,x,y,phi,&
-       rho_0,tau_0,etot_0,mom_A_0,mom_B_0,mom_x_0,mom_y_0,flux_out,recons)
+       rho_0,tau_0,etot_0,mom_A_0,mom_B_0,mom_x_0,mom_y_0,flux_out,recons,omega_grid)
   call momentum_sync(nx,ny,mom_A,mom_B,mom_x,mom_y,x,y,alpha)
 
   
   beta = 2d0/3d0
   call RK_substep(nx,ny,dx,dy,kappa,gamma,dt,beta,rho_floor,&
        rho,tau,etot,mom_A,mom_B,mom_x,mom_y,x,y,phi,&
-       rho_0,tau_0,etot_0,mom_A_0,mom_B_0,mom_x_0,mom_y_0,flux_out,recons)
+       rho_0,tau_0,etot_0,mom_A_0,mom_B_0,mom_x_0,mom_y_0,flux_out,recons,omega_grid)
   call momentum_sync(nx,ny,mom_A,mom_B,mom_x,mom_y,x,y,alpha)
 
 

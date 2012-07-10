@@ -1,10 +1,10 @@
 subroutine RK_substep(nx,ny,dx,dy,kappa,gamma,dt,beta,rho_floor,&
        rho,tau,etot,mom_A,mom_B,mom_x,mom_y,x,y,phi,&
-       rho_0,tau_0,etot_0,mom_A_0,mom_B_0,mom_x_0,mom_y_0,flux_out_tot,recons)
+       rho_0,tau_0,etot_0,mom_A_0,mom_B_0,mom_x_0,mom_y_0,flux_out_tot,recons,omega_grid)
   implicit none
   include 'variables.h'
   include 'grid.h'
-  double precision :: beta, r_here
+  double precision :: beta, r_here, omega_grid
   integer :: recons
   double precision :: Flux_out_tot,floor_plus_tot
 !  print*,'succesfully entered RK_substep subroutine, beta =',beta
@@ -35,7 +35,7 @@ subroutine RK_substep(nx,ny,dx,dy,kappa,gamma,dt,beta,rho_floor,&
      y,y_left_x,y_right_x,y_left_y,y_right_y,&
      phi,phi_left_x,phi_right_x,phi_left_y,phi_right_y,&
      rho_Fx,tau_Fx,etot_Fx,mom_A_Fx,mom_B_Fx,mom_x_Fx,mom_y_Fx,&
-     rho_Fy,tau_Fy,etot_Fy,mom_A_Fy,mom_B_Fy,mom_x_Fy,mom_y_Fy)
+     rho_Fy,tau_Fy,etot_Fy,mom_A_Fy,mom_B_Fy,mom_x_Fy,mom_y_Fy,omega_grid)
   !print*,'finished grid fluxes'
   
 !  print*,'grid_timedifs...'
@@ -52,7 +52,7 @@ subroutine RK_substep(nx,ny,dx,dy,kappa,gamma,dt,beta,rho_floor,&
      phi,phi_left_x,phi_right_x,phi_left_y,phi_right_y,&
      rho_Fx,tau_Fx,etot_Fx,mom_A_Fx,mom_B_Fx,mom_x_Fx,mom_y_Fx,&
      rho_Fy,tau_Fy,etot_Fy,mom_A_Fy,mom_B_Fy,mom_x_Fy,mom_y_Fy,&
-     delta_rho,delta_tau,delta_etot,delta_mom_A,delta_mom_B,delta_mom_x,delta_mom_y)
+     delta_rho,delta_tau,delta_etot,delta_mom_A,delta_mom_B,delta_mom_x,delta_mom_y,omega_grid)
   !print*,'finished grid_timedifs'
 
 !  print*,'beta =',beta,'dt =',dt

@@ -1,5 +1,5 @@
 subroutine initial_annulus(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
-       rho,tau,etot,mom_A,mom_B,x,y,phi)
+       rho,tau,etot,mom_A,mom_B,x,y,phi,omega_k)
   implicit none
   include 'variables.h'
   double precision :: rho(nx,ny),tau(nx,ny),etot(nx,ny),mom_A(nx,ny),mom_B(nx,ny)
@@ -10,7 +10,7 @@ subroutine initial_annulus(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,
   integer, parameter :: n=100000
   double precision :: rho_1D(n),phi_1D(n),omega_1D(n),einternal_1D(n),dr
   double precision :: x_min,x_max,y_min,y_max,e_internal
-  double precision :: slope
+  double precision :: slope,omega_k,omega_grid
   integer :: radial_index
 
   !read in parameters
@@ -31,7 +31,7 @@ subroutine initial_annulus(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,
 
   call getrtheta(nx,ny,x,y,r,theta)
         
-  call radial_initial_annulus(n,dr,rho_1D,phi_1D,omega_1D)
+  call radial_initial_annulus(n,dr,rho_1D,phi_1D,omega_1D,omega_k)
 
   open(99,file='initial.dat') 
 
@@ -53,7 +53,7 @@ subroutine initial_annulus(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,
 !           v_theta(i,j) = 0d0 
         end if
 
-        tau(i,j) = rho(i,j)*(kappa/(gamma-1))**(1/gamma)      
+!        tau(i,j) = rho(i,j)*(kappa/(gamma-1))**(1/gamma)      
       ! v_theta is the linear velocity in the theta direction
         
      end do
@@ -84,14 +84,14 @@ subroutine initial_annulus(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,
   call mom_cyl2cart(nx,ny,mom_A,mom_B,mom_x,mom_y,x,y)
 
 
+!  omega_grid = 0d0
+!  call kinetic_energy(nx,ny,rho,mom_x,mom_y,e_kinetic,omega_grid)
 
-  call kinetic_energy(nx,ny,rho,mom_x,mom_y,e_kinetic)
-
-  do j=1,Ny
-     do i=1,Nx
-        e_internal = tau(i,j)**gamma
-        etot(i,j) = e_internal+e_kinetic(i,j)
-     end do
-  end do
+!  do j=1,Ny
+!     do i=1,Nx
+!        e_internal = tau(i,j)**gamma
+!        etot(i,j) = e_internal+e_kinetic(i,j)
+!     end do
+!  end do
 
 end subroutine initial_annulus

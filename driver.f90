@@ -1,5 +1,5 @@
 subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
-       rho,tau,etot,mom_A,mom_B,x,y,phi,alpha,recons)
+       rho,tau,etot,mom_A,mom_B,x,y,phi,alpha,recons,omega_grid)
   implicit none
   include 'variables.h'
   double precision :: rho(nx,ny),tau(nx,ny),etot(nx,ny)
@@ -8,7 +8,7 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
   double precision :: beta,dt_cfl,J_tot_last,M_tot_last,flux_in,flux_in_tot
   double precision :: out_time_last,output_freq
 
-  double precision :: alpha
+  double precision :: alpha, omega_grid
 
   integer :: outcount,output_yes,timeint,quit,recons
 
@@ -37,7 +37,7 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
      
      !     print*,'calling timestep'
      call grid_timestep(nx,ny,dx,dy,kappa,gamma,cfl_factor,&
-          rho,tau,etot,mom_x,mom_y,dt_cfl)
+          rho,tau,etot,mom_x,mom_y,dt_cfl,omega_grid,x,y)
      
           print*,'starting timestep',timestep
      if (timestep .lt. 2) then
@@ -64,7 +64,7 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
      !     end if
 
      call RK_step(nx,ny,dx,dy,kappa,gamma,dt,rho_floor,&
-          rho,tau,etot,mom_A,mom_B,mom_x,mom_y,phi,x,y,flux_in,alpha,recons)
+          rho,tau,etot,mom_A,mom_B,mom_x,mom_y,phi,x,y,flux_in,alpha,recons,omega_grid)
      
      timestep = timestep + 1
      time = time + dt     

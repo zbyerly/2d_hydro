@@ -1,5 +1,5 @@
 subroutine grid_timestep(nx,ny,dx,dy,kappa,gamma,cfl_factor,&
-     rho,tau,etot,mom_x,mom_y,dt_cfl)
+     rho,tau,etot,mom_x,mom_y,dt_cfl,omega_grid,x,y)
   implicit none
   include 'variables.h'
   double precision :: rho(nx,ny),tau(nx,ny),etot(nx,ny)
@@ -7,11 +7,14 @@ subroutine grid_timestep(nx,ny,dx,dy,kappa,gamma,cfl_factor,&
   double precision :: sr_x(nx,ny),sr_y(nx,ny)
   double precision :: dt_cfl,dt_x(nx,ny),dt_y(nx,ny)
 
+!  double precision :: x(nx,ny),y(nx,ny)
+  double precision :: omega_grid
+
   dt_cfl = 100d0
 
 !  print*,'calling spectral_radius'
   call spectral_radius(nx,ny,rho,mom_x,mom_y,etot&
-       ,gamma,tau,sr_x,sr_y)
+       ,gamma,tau,sr_x,sr_y,omega_grid,x,y)
 
 
   ! what is the # of ghost zones? j=2,ny-1 means 1 ghost zone here?

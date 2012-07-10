@@ -1,10 +1,12 @@
-subroutine flux(nx,ny,mom_x,mom_y,rho,u,u_flux,dir)
+subroutine flux(nx,ny,mom_x,mom_y,rho,u,u_flux,dir,omega_grid,x,y)
   implicit none
   double precision :: v_x(nx,ny),v_y(nx,ny),u_flux(nx,ny),u(nx,ny)
   double precision :: rho(nx,ny),mom_y(nx,ny),mom_x(nx,ny)
   integer :: i,j,nx,ny,dir
-  
-  call velocity(nx,ny,mom_x,mom_y,rho,v_x,v_y)
+  double precision :: omega_grid
+  double precision :: x(nx,ny),y(nx,ny)
+
+  call velocity(nx,ny,mom_x,mom_y,rho,v_x,v_y,omega_grid,x,y)
 
   !2/22/2011 2:14pm changed 'ny-1' to 'ny' and 'nx-1' to 'nx'
   

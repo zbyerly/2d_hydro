@@ -1,4 +1,4 @@
-subroutine radial_initial_annulus(n,dr,rho,phi,omega)
+subroutine radial_initial_annulus(n,dr,rho,phi,omega,omega_k)
   implicit none
   integer :: i,j,integrate,n,nstar
   

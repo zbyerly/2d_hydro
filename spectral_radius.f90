@@ -1,4 +1,4 @@
-subroutine spectral_radius(nx,ny,rho,mom_x,mom_y,etot,gamma,tau,sr_x,sr_y)
+subroutine spectral_radius(nx,ny,rho,mom_x,mom_y,etot,gamma,tau,sr_x,sr_y,omega_grid,x,y)
   implicit none
   include 'variables.h'
   double precision :: r(nx,ny),theta(nx,ny),rho(nx,ny),mom_x(nx,ny)
@@ -6,8 +6,12 @@ subroutine spectral_radius(nx,ny,rho,mom_x,mom_y,etot,gamma,tau,sr_x,sr_y)
   double precision :: sr_x(nx,ny),sr_y(nx,ny),x(nx,ny),y(nx,ny)
   double precision :: v_x(nx,ny),v_y(nx,ny),c_s(nx,ny),tau(nx,ny)
 
+  double precision :: omega_grid
+!  double precision :: x(nx,ny),y(nx,ny)
+
+
   call soundspeed(nx,ny,rho,mom_x,mom_y,etot,gamma,tau,c_s)  
-  call velocity(nx,ny,mom_x,mom_y,rho,v_x,v_y)
+  call velocity(nx,ny,mom_x,mom_y,rho,v_x,v_y,omega_grid,x,y)
 
 !  sr_x = c_s!abs(v_x) + c_s
 !  sr_y = c_s!abs(v_y) + c_s

@@ -11,7 +11,7 @@ subroutine grid_timedifs(nx,ny,gamma,dx,dy,&
      phi,phi_left_x,phi_right_x,phi_left_y,phi_right_y,&
      rho_Fx,tau_Fx,etot_Fx,mom_A_Fx,mom_B_Fx,mom_x_Fx,mom_y_Fx,&
      rho_Fy,tau_Fy,etot_Fy,mom_A_Fy,mom_B_Fy,mom_x_Fy,mom_y_Fy,&
-     delta_rho,delta_tau,delta_etot,delta_mom_A,delta_mom_B,delta_mom_x,delta_mom_y)
+     delta_rho,delta_tau,delta_etot,delta_mom_A,delta_mom_B,delta_mom_x,delta_mom_y,omega_grid)
 
   implicit none
   include 'variables.h'
@@ -21,6 +21,7 @@ subroutine grid_timedifs(nx,ny,gamma,dx,dy,&
   double precision :: pressure_left(nx,ny),pressure_right(nx,ny)
 
   double precision :: delta_mom_X1(nx,ny),delta_mom_Y1(nx,ny)
+  double precision :: omega_grid
 
   delta_rho = 0d0
   delta_tau = 0d0
@@ -60,7 +61,7 @@ subroutine grid_timedifs(nx,ny,gamma,dx,dy,&
   !$OMP END PARALLEL DO
 
 
-  call velocity(nx,ny,mom_x,mom_y,rho,v_x,v_y)
+  call velocity(nx,ny,mom_x,mom_y,rho,v_x,v_y,omega_grid)
 
 !!  !$OMP PARALLEL DO PRIVATE(i,j)
 !  do j=1,ny

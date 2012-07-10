@@ -10,7 +10,7 @@ subroutine get_pressure(nx,ny,rho,mom_x,mom_y,etot,gamma,tau,pressure)
   include 'params.h'
 
 !  print*,'getting internal energy'
-  call internal_energy(nx,ny,rho,mom_x,mom_y,etot,e_internal)
+!  call internal_energy(nx,ny,rho,mom_x,mom_y,etot,e_internal)
 
 !  print*,'calculating pressure'
   !$OMP PARALLEL DO PRIVATE(i,j)
@@ -19,13 +19,13 @@ subroutine get_pressure(nx,ny,rho,mom_x,mom_y,etot,gamma,tau,pressure)
 
         pressure(i,j) = kappa*rho(i,j)**gamma
         
-        if ( e_internal(i,j)  .gt. 1e-3*etot(i,j)) then
+!        if ( e_internal(i,j)  .gt. 1e-3*etot(i,j)) then
 !           pressure(i,j) = (gamma-1d0)*e_internal(i,j)
-        else           
+!        else           
 !           print*,i,j,tau(i,j)
 !           pressure(i,j) = (gamma-1d0)*(tau(i,j)**gamma)
 !           print*,i,j,tau(i,j)
-        end if
+!        end if
 !        if (pressure(i,j) .lt. 1d-9) then
 !           print*,i,j,e_internal(i,j)
 !        end if        
