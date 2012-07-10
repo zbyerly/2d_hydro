@@ -1,10 +1,11 @@
 subroutine RK_substep(nx,ny,dx,dy,kappa,gamma,dt,beta,rho_floor,&
        rho,tau,etot,mom_A,mom_B,mom_x,mom_y,x,y,phi,&
-       rho_0,tau_0,etot_0,mom_A_0,mom_B_0,mom_x_0,mom_y_0,flux_out_tot)
+       rho_0,tau_0,etot_0,mom_A_0,mom_B_0,mom_x_0,mom_y_0,flux_out_tot,recons)
   implicit none
   include 'variables.h'
   include 'grid.h'
   double precision :: beta, r_here
+  integer :: recons
   double precision :: Flux_out_tot,floor_plus_tot
 !  print*,'succesfully entered RK_substep subroutine, beta =',beta
 !  print*,'reconstructing grid...'
@@ -18,7 +19,7 @@ subroutine RK_substep(nx,ny,dx,dy,kappa,gamma,dt,beta,rho_floor,&
      mom_y,mom_y_left_x,mom_y_right_x,mom_y_left_y,mom_y_right_y,&
      x,x_left_x,x_right_x,x_left_y,x_right_y,&
      y,y_left_x,y_right_x,y_left_y,y_right_y,&
-     phi,phi_left_x,phi_right_x,phi_left_y,phi_right_y)
+     phi,phi_left_x,phi_right_x,phi_left_y,phi_right_y,recons)
   !print*,'finished reconstructing grid'
 
 !  print*,'grid_fluxes...'

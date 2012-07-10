@@ -5,10 +5,6 @@ subroutine velocity(nx,ny,mom_x,mom_y,rho,v_x,v_y)
   double precision :: mom_x(nx,ny),mom_y(nx,ny)
   double precision :: v_x(nx,ny),v_y(nx,ny)
 
-  !Del dot U_o dot V
-  ! + (del dot u)P
-
-  !sum (rho u cross omega)
 
   !$OMP PARALLEL DO PRIVATE(i,j)
   do j=1,ny

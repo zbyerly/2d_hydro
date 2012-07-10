@@ -1,5 +1,5 @@
 subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
-       rho,tau,etot,mom_A,mom_B,x,y,phi,alpha)
+       rho,tau,etot,mom_A,mom_B,x,y,phi,alpha,recons)
   implicit none
   include 'variables.h'
   double precision :: rho(nx,ny),tau(nx,ny),etot(nx,ny)
@@ -10,7 +10,7 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
 
   double precision :: alpha
 
-  integer :: outcount,output_yes,timeint,quit
+  integer :: outcount,output_yes,timeint,quit,recons
 
   timestep = 0
   time = 0d0
@@ -64,7 +64,7 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
      !     end if
 
      call RK_step(nx,ny,dx,dy,kappa,gamma,dt,rho_floor,&
-          rho,tau,etot,mom_A,mom_B,mom_x,mom_y,phi,x,y,flux_in,alpha)
+          rho,tau,etot,mom_A,mom_B,mom_x,mom_y,phi,x,y,flux_in,alpha,recons)
      
      timestep = timestep + 1
      time = time + dt     
