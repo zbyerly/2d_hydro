@@ -21,8 +21,10 @@ program main
 
   call get_command_argument(1 , mom_geom)
   call get_command_argument(2 , reconstruction)
+!  reconstruction = "minmod"
   call get_command_argument(3 , rotate)
-  
+ 
+ 
 
   if (mom_geom .eq. 'cyl') then
      alpha = 0d0
@@ -47,17 +49,17 @@ program main
      print*,'using ppm'
      recons = 1
   else
-     print*,'valid cmdline arguments are minmod or ppm'
+!     print*,'valid cmdline arguments are minmod or ppm'
   end if
 
-  if (reconstruction .eq. 'norotate') then
+  if (rotate .eq. 'norotate') then
      print*,'rotation off'
      rotation = 0
-  else if (reconstruction .eq. 'rotate') then
+  else if (rotate .eq. 'rotate') then
      print*,'rotation on'
      rotation = 1
   else
-     print*,'valid cmdline arguments are minmod or ppm'
+!     print*,'valid cmdline arguments are minmod or ppm'
      print*,'rotation off by default...'
      rotation = 0
   end if

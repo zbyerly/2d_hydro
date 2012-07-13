@@ -61,7 +61,7 @@ subroutine grid_timedifs(nx,ny,gamma,dx,dy,&
   !$OMP END PARALLEL DO
 
 
-  call velocity(nx,ny,mom_x,mom_y,rho,v_x,v_y,omega_grid)
+  call velocity(nx,ny,mom_x,mom_y,rho,v_x,v_y,omega_grid,x,y)
 
 !!  !$OMP PARALLEL DO PRIVATE(i,j)
 !  do j=1,ny
