@@ -23,6 +23,7 @@ subroutine grid_timedifs(nx,ny,gamma,dx,dy,&
   double precision :: delta_mom_X1(nx,ny),delta_mom_Y1(nx,ny)
   double precision :: omega_grid
 
+
   delta_rho = 0d0
   delta_tau = 0d0
   delta_etot = 0d0
