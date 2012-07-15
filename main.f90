@@ -73,7 +73,7 @@ program main
 !  call initial_sod(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
 !       rho,tau,etot,mom_A,mom_B,x,y,phi)
 
-  if (rotation .eq. 0) then
+  if (rotation .eq. 1) then
      omega_grid = omega_k
   else
      omega_grid = 0d0
