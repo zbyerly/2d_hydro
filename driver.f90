@@ -18,7 +18,8 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
   flux_in_tot = 0d0
 
   out_time_last = 0d0
-  output_freq = 4.147d-7
+!  output_freq = 4.147d-7
+  output_freq = 4.147d-8
   outcount = 0
 
 ! defining mom_x,mom_y from mom_A,mom_B 
@@ -80,8 +81,8 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
      end if
 
 !        call output(nx,ny,rho,x,y,t
-     timeint = floor(time/output_freq)
-!     timeint = timestep
+!     timeint = floor(time/output_freq)
+     timeint = outcount
      if ( output_yes .eq. 1 ) then
         call output(nx,ny,rho,x,y,timestep,timeint,gamma,&
              phi,mom_A,mom_B,mom_x,mom_y,etot,tau)
