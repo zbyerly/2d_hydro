@@ -180,7 +180,7 @@ subroutine grid_timedifs(nx,ny,gamma,dx,dy,&
            delta_mom_B(i,j) = delta_mom_B(i,j) + r(i,j)*(delta_mom_Y1(i,j)*&
                 (x(i,j)/r(i,j)) - delta_mom_X1(i,j)*(y(i,j)/r(i,j)))
            
-           delta_mom_A(i,j) = delta_mom_A(i,j) + rho(i,j)*( (-y(i,j)*v_x(i,j)+x(i,j)*v_y(i,j))**2d0 )/( r(i,j)**3d0 )
+           delta_mom_A(i,j) = delta_mom_A(i,j) + rho(i,j)*( (mom_B(i,j)/rho(i,j))**2d0 )/( r(i,j)**3d0 )
 
 !           delta_mom_B(i,j) = delta_mom_B(i,j) - rho(i,j)*( (-y(i,j)*v_x(i,j)+x(i,j)*v_y(i,j))*(x(i,j)*v_x(i,j)+y(i,j)*v_y(i,j)) )/( r(i,j)**3d0)
 
