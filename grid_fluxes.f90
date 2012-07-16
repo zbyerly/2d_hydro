@@ -36,16 +36,16 @@ subroutine grid_fluxes(nx,ny,gamma,dx,dy,Flux_out_tot,&
 !  print*,'done getting pressure'
 
 !  print*,'computing fluxes...'
-  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,rho_left_x  ,rho_fluxL  ,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,tau_left_x  ,tau_fluxL  ,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,rho_left_x  ,rho_fluxL  ,dir,omega_grid,x_left_x,y_left_x)
+  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,tau_left_x  ,tau_fluxL  ,dir,omega_grid,x_left_x,y_left_x)
   temp = etot_left_x+pressure
-  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,temp        ,etot_fluxL ,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,mom_A_left_x,mom_A_fluxL,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,mom_B_left_x,mom_B_fluxL,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,temp        ,etot_fluxL ,dir,omega_grid,x_left_x,y_left_x)
+  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,mom_A_left_x,mom_A_fluxL,dir,omega_grid,x_left_x,y_left_x)
+  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,mom_B_left_x,mom_B_fluxL,dir,omega_grid,x_left_x,y_left_x)
 
   !cartesian momentum
-  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,mom_x_left_x,mom_x_fluxL,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,mom_y_left_x,mom_y_fluxL,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,mom_x_left_x,mom_x_fluxL,dir,omega_grid,x_left_x,y_left_x)
+  call flux(nx,ny,mom_x_left_x,mom_y_left_x,rho_left_x,mom_y_left_x,mom_y_fluxL,dir,omega_grid,x_left_x,y_left_x)
 
 
 
@@ -56,23 +56,23 @@ subroutine grid_fluxes(nx,ny,gamma,dx,dy,Flux_out_tot,&
 !  print*,'done getting pressure'
 
 
-  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,rho_right_x  ,rho_fluxR  ,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,tau_right_x  ,tau_fluxR  ,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,rho_right_x  ,rho_fluxR  ,dir,omega_grid,x_right_x,y_right_x)
+  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,tau_right_x  ,tau_fluxR  ,dir,omega_grid,x_right_x,y_right_x)
   temp = etot_right_x+pressure
-  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,temp         ,etot_fluxR ,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,mom_A_right_x,mom_A_fluxR,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,mom_B_right_x,mom_B_fluxR,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,temp         ,etot_fluxR ,dir,omega_grid,x_right_x,y_right_x)
+  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,mom_A_right_x,mom_A_fluxR,dir,omega_grid,x_right_x,y_right_x)
+  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,mom_B_right_x,mom_B_fluxR,dir,omega_grid,x_right_x,y_right_x)
 
   !cartesian momentum
-  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,mom_x_right_x,mom_x_fluxR,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,mom_y_right_x,mom_y_fluxR,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,mom_x_right_x,mom_x_fluxR,dir,omega_grid,x_right_x,y_right_x)
+  call flux(nx,ny,mom_x_right_x,mom_y_right_x,rho_right_x,mom_y_right_x,mom_y_fluxR,dir,omega_grid,x_right_x,y_right_x)
 
   
   !print*,'getting spectral radius...'
   call spectral_radius(nx,ny,rho_left_x,&
-       mom_x_left_x,mom_y_left_x,etot_left_x,gamma,tau_left_x,sr_xL,sr_y,omega_grid,x,y)
+       mom_x_left_x,mom_y_left_x,etot_left_x,gamma,tau_left_x,sr_xL,sr_y,omega_grid,x_left_x,y_left_x)
   call spectral_radius(nx,ny,rho_right_x,&
-       mom_x_right_x,mom_y_right_x,etot_right_x,gamma,tau_right_x,sr_xR,sr_y,omega_grid,x,y)
+       mom_x_right_x,mom_y_right_x,etot_right_x,gamma,tau_right_x,sr_xR,sr_y,omega_grid,x_right_x,y_right_x)
   !print*,'done getting spectral radius'
 
 
@@ -113,16 +113,16 @@ subroutine grid_fluxes(nx,ny,gamma,dx,dy,Flux_out_tot,&
 !  print*,'done getting pressure'
 
 !  print*,'computing fluxes...'
-  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,rho_left_y  ,rho_fluxL  ,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,tau_left_y  ,tau_fluxL  ,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,rho_left_y  ,rho_fluxL  ,dir,omega_grid,x_left_y,y_left_y)
+  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,tau_left_y  ,tau_fluxL  ,dir,omega_grid,x_left_y,y_left_y)
   temp = etot_left_y+pressure
-  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,temp        ,etot_fluxL ,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,mom_A_left_y,mom_A_fluxL,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,mom_B_left_y,mom_B_fluxL,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,temp        ,etot_fluxL ,dir,omega_grid,x_left_y,y_left_y)
+  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,mom_A_left_y,mom_A_fluxL,dir,omega_grid,x_left_y,y_left_y)
+  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,mom_B_left_y,mom_B_fluxL,dir,omega_grid,x_left_y,y_left_y)
 
   !cartesian momentum
-  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,mom_x_left_y,mom_x_fluxL,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,mom_y_left_y,mom_y_fluxL,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,mom_x_left_y,mom_x_fluxL,dir,omega_grid,x_left_y,y_left_y)
+  call flux(nx,ny,mom_x_left_y,mom_y_left_y,rho_left_y,mom_y_left_y,mom_y_fluxL,dir,omega_grid,x_left_y,y_left_y)
 
 
 
@@ -132,23 +132,23 @@ subroutine grid_fluxes(nx,ny,gamma,dx,dy,Flux_out_tot,&
 !  print*,'done getting pressure'
 
 
-  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,rho_right_y  ,rho_fluxR  ,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,tau_right_y  ,tau_fluxR  ,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,rho_right_y  ,rho_fluxR  ,dir,omega_grid,x_right_y,y_right_y)
+  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,tau_right_y  ,tau_fluxR  ,dir,omega_grid,x_right_y,y_right_y)
   temp = etot_right_y+pressure
-  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,temp         ,etot_fluxR ,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,mom_A_right_y,mom_A_fluxR,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,mom_B_right_y,mom_B_fluxR,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,temp         ,etot_fluxR ,dir,omega_grid,x_right_y,y_right_y)
+  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,mom_A_right_y,mom_A_fluxR,dir,omega_grid,x_right_y,y_right_y)
+  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,mom_B_right_y,mom_B_fluxR,dir,omega_grid,x_right_y,y_right_y)
 
   !cartesian momentum
-  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,mom_x_right_y,mom_x_fluxR,dir,omega_grid,x,y)
-  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,mom_y_right_y,mom_y_fluxR,dir,omega_grid,x,y)
+  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,mom_x_right_y,mom_x_fluxR,dir,omega_grid,x_right_y,y_right_y)
+  call flux(nx,ny,mom_x_right_y,mom_y_right_y,rho_right_y,mom_y_right_y,mom_y_fluxR,dir,omega_grid,x_right_y,y_right_y)
 
   
 !  print*,'done with right side'
   call spectral_radius(nx,ny,rho_left_y,&
-       mom_x_left_y,mom_y_left_y,etot_left_y,gamma,tau_left_y,sr_xL,sr_yL,omega_grid,x,y)
+       mom_x_left_y,mom_y_left_y,etot_left_y,gamma,tau_left_y,sr_xL,sr_yL,omega_grid,x_left_y,y_left_y)
   call spectral_radius(nx,ny,rho_right_y,&
-       mom_x_right_y,mom_y_right_y,etot_right_y,gamma,tau_right_y,sr_xR,sr_yR,omega_grid,x,y)
+       mom_x_right_y,mom_y_right_y,etot_right_y,gamma,tau_right_y,sr_xR,sr_yR,omega_grid,x_right_y,y_right_y)
   
 !  print*,'done with sr'
 
