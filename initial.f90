@@ -1,5 +1,5 @@
 subroutine initial(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
-       rho,tau,etot,mom_A,mom_B,x,y,phi)
+       rho,tau,etot,mom_A,mom_B,x,y,phi,omega)
   implicit none
   include 'variables.h'
   double precision :: rho(nx,ny),tau(nx,ny),etot(nx,ny),mom_A(nx,ny),mom_B(nx,ny)
@@ -75,7 +75,7 @@ subroutine initial(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
 !           v_theta(i,j) = 0d0 
         end if
 
-        tau(i,j) = rho(i,j)*(kappa/(gamma-1))**(1/gamma)      
+!        tau(i,j) = rho(i,j)*(kappa/(gamma-1))**(1/gamma)      
       ! v_theta is the linear velocity in the theta direction
 
 !        mom_A(i,j) = 0d0
@@ -85,15 +85,15 @@ subroutine initial(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
      end do
   end do
 
-  open(99,file='tau_initial.dat')
-  do j=1,ny
-     do i=1,nx
-        write(99,*) x(i,j),y(i,j),tau(i,j)
+!  open(99,file='tau_initial.dat')
+!  do j=1,ny
+!     do i=1,nx
+!        write(99,*) x(i,j),y(i,j),tau(i,j)
 !,phi(i,j)-phi(i,ny-j+1)
 !x(i,j)-x(i,ny-j+1)
-     end do
-  end do
-  close(99)
+!     end do
+!  end do
+!  close(99)
 !  call exit(0)
 
   call getrtheta(nx,ny,x,y,r,theta)
@@ -111,14 +111,14 @@ subroutine initial(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
 
 
 
-  call kinetic_energy(nx,ny,rho,mom_x,mom_y,e_kinetic)
+!  call kinetic_energy(nx,ny,rho,mom_x,mom_y,e_kinetic)
 
-  do j=1,Ny
-     do i=1,Nx
-        e_internal = tau(i,j)**gamma
-        etot(i,j) = e_internal+e_kinetic(i,j)
-     end do
-  end do
+!  do j=1,Ny
+!     do i=1,Nx
+!        e_internal = tau(i,j)**gamma
+!        etot(i,j) = e_internal+e_kinetic(i,j)
+!     end do
+!  end do
 
 
 

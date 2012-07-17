@@ -67,9 +67,10 @@ program main
 
 
 
-  call initial_annulus(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
+!  call initial_annulus(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
+!       rho,tau,etot,mom_A,mom_B,x,y,phi,omega_k)
+  call initial(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
        rho,tau,etot,mom_A,mom_B,x,y,phi,omega_k)
-
 !  call initial_sod(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
 !       rho,tau,etot,mom_A,mom_B,x,y,phi)
 
