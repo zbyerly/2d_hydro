@@ -150,9 +150,9 @@ program post
      end do
         
      write(11,*) timeint, transform(1)/transform(0)
-     write(11,*) timeint, transform(2)/transform(0)
-     write(11,*) timeint, transform(3)/transform(0)
-     write(11,*) timeint, transform(4)/transform(0)
+     write(12,*) timeint, transform(2)/transform(0)
+     write(13,*) timeint, transform(3)/transform(0)
+     write(14,*) timeint, transform(4)/transform(0)
 
 
   end do
