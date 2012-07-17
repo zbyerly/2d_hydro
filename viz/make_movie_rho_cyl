@@ -1,0 +1,16 @@
+#!/bin/bash
+
+rm images/cyl/*
+
+ls /home/zbyerly/movies/data/cyl/rho*.dat > filelist
+par=0
+while read datafile
+do
+cp $datafile /home/zbyerly/movies/input.dat
+./single_frame.gpt
+mv rho.png /home/zbyerly/movies/images/cyl/rho$par.png
+(( par++ ))
+done < filelist
+
+
+ffmpeg -qscale 1 -r 20 -b 9600 -i /home/zbyerly/movies/images/cyl/rho%d.png cyl.mp4
