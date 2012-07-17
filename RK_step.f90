@@ -67,13 +67,13 @@ subroutine RK_step(nx,ny,dx,dy,kappa,gamma,dt,rho_floor,&
   
 !  call internal_energy(nx,ny,rho,mom_x,mom_y,etot,e_internal)
 !!!  !$OMP PARALLEL DO PRIVATE(i,j)
-  do j=1,ny
-     do i=1,nx
-        if (e_internal(i,j) .gt. 1d-1*etot(i,j)) then
+!  do j=1,ny
+!     do i=1,nx
+!        if (e_internal(i,j) .gt. 1d-1*etot(i,j)) then
 !           tau(i,j) = (e_internal(i,j))**(1d0/gamma)
-        end if
-     end do
-  end do
+!        end if
+!     end do
+!  end do
 !!!  !$OMP END PARALLEL DO
 
 end subroutine RK_step
