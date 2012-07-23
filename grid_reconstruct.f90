@@ -15,10 +15,10 @@ subroutine grid_reconstruct(nx,ny,rho_floor,&
   include 'grid.h'
 
   !divide conserved quantities by rho
-!  tau = tau/rho
-!  etot = etot/rho
-!  mom_A = mom_A/rho
-!  mom_B = mom_B/rho
+  mom_A=mom_A/rho
+  mom_B=mom_B/rho
+  mom_x=mom_x/rho
+  mom_y=mom_y/rho
 
   if (recons .eq. 1) then
 !     print*, 'using ppm!'
@@ -55,17 +55,26 @@ subroutine grid_reconstruct(nx,ny,rho_floor,&
 !!$  etot_left_y = etot_left_y*rho_left_y
 !!$  etot_right_y = etot_right_y*rho_right_y
 !!$
-!!$  mom_A_left_x = mom_A_left_x*rho_left_x
-!!$  mom_A_right_x = mom_A_right_x*rho_right_x
-!!$  mom_A_left_y = mom_A_left_y*rho_left_y
-!!$  mom_A_right_y = mom_A_right_y*rho_right_y
-!!$
-!!$  mom_B_left_x = mom_B_left_x*rho_left_x
-!!$  mom_B_right_x = mom_B_right_x*rho_right_x
-!!$  mom_B_left_y = mom_B_left_y*rho_left_y
-!!$  mom_B_right_y = mom_B_right_y*rho_right_y
-!!$  
+  mom_A_left_x = mom_A_left_x*rho_left_x
+  mom_A_right_x = mom_A_right_x*rho_right_x
+  mom_A_left_y = mom_A_left_y*rho_left_y
+  mom_A_right_y = mom_A_right_y*rho_right_y
 
+  mom_B_left_x = mom_B_left_x*rho_left_x
+  mom_B_right_x = mom_B_right_x*rho_right_x
+  mom_B_left_y = mom_B_left_y*rho_left_y
+  mom_B_right_y = mom_B_right_y*rho_right_y
+
+  mom_x_left_x = mom_x_left_x*rho_left_x
+  mom_x_right_x = mom_x_right_x*rho_right_x
+  mom_x_left_y = mom_x_left_y*rho_left_y
+  mom_x_right_y = mom_x_right_y*rho_right_y
+
+  mom_y_left_x = mom_y_left_x*rho_left_x
+  mom_y_right_x = mom_y_right_x*rho_right_x
+  mom_y_left_y = mom_y_left_y*rho_left_y
+  mom_y_right_y = mom_y_right_y*rho_right_y
+  
 
 !  call reconstruct(nx,ny,x,x_left_x,x_right_x,x_left_y,x_right_y)
 !  call reconstruct(nx,ny,y,y_left_x,y_right_x,y_left_y,y_right_y)

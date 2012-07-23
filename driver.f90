@@ -18,9 +18,11 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
   flux_in_tot = 0d0
 
   out_time_last = 0d0
-  output_freq = 4.147d-7
+  output_freq = 1d-1
+!  output_freq = 4.147d-7
 !  output_freq = 4.147d-8
   outcount = 0
+  
 
 ! defining mom_x,mom_y from mom_A,mom_B 
   call mom_cyl2cart(nx,ny,mom_A,mom_B,mom_x,mom_y,x,y)
@@ -29,8 +31,8 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
   !output initial data
   open(30,file='J_tot.dat') 
   open(31,file='diag.dat')
-  call output(nx,ny,rho,x,y,timestep,time,gamma,&
-       phi,mom_A,mom_B,mom_x,mom_y,etot,tau,output_freq)
+!  call output(nx,ny,rho,x,y,timestep,time,gamma,&
+!       phi,mom_A,mom_B,mom_x,mom_y,etot,tau,output_freq)
  ! call exit(0)
   print*,'endtime = ',endtime
   do while (time .lt. endtime)
@@ -85,7 +87,7 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
      timeint = outcount
      if ( output_yes .eq. 1 ) then
         call output(nx,ny,rho,x,y,timestep,timeint,gamma,&
-             phi,mom_A,mom_B,mom_x,mom_y,etot,tau)
+             phi,mom_A,mom_B,mom_x,mom_y,etot,tau,omega_grid)
         out_time_last = time
      end if
      output_yes = 0
