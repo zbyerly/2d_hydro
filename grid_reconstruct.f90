@@ -14,71 +14,39 @@ subroutine grid_reconstruct(nx,ny,rho_floor,&
   include 'variables.h'
   include 'grid.h'
 
+  double precision :: mom_A_2(nx,ny),mom_B_2(nx,ny),mom_x_2(nx,ny),mom_y_2(nx,ny)
+
+  call getrtheta(nx,ny,x,y,r,theta)
+
   !divide conserved quantities by rho
-  mom_A=mom_A/rho
-  mom_B=mom_B/rho
-  mom_x=mom_x/rho
-  mom_y=mom_y/rho
+  mom_A_2=mom_A/rho
+  mom_B_2=mom_B/rho/r
+  mom_x_2=mom_x/rho
+  mom_y_2=mom_y/rho
 
   if (recons .eq. 1) then
 !     print*, 'using ppm!'
      call reconstruct_ppm(nx,ny,rho,rho_left_x,rho_right_x,rho_left_y,rho_right_y)
      call reconstruct_ppm(nx,ny,tau,tau_left_x,tau_right_x,tau_left_y,tau_right_y)
      call reconstruct_ppm(nx,ny,etot,etot_left_x,etot_right_x,etot_left_y,etot_right_y)
-     call reconstruct_ppm(nx,ny,mom_A,mom_A_left_x,mom_A_right_x,mom_A_left_y,mom_A_right_y)
-     call reconstruct_ppm(nx,ny,mom_B,mom_B_left_x,mom_B_right_x,mom_B_left_y,mom_B_right_y)
-     call reconstruct_ppm(nx,ny,mom_x,mom_x_left_x,mom_x_right_x,mom_x_left_y,mom_x_right_y)
-     call reconstruct_ppm(nx,ny,mom_y,mom_y_left_x,mom_y_right_x,mom_y_left_y,mom_y_right_y)
+     call reconstruct_ppm(nx,ny,mom_A_2,mom_A_left_x,mom_A_right_x,mom_A_left_y,mom_A_right_y)
+     call reconstruct_ppm(nx,ny,mom_B_2,mom_B_left_x,mom_B_right_x,mom_B_left_y,mom_B_right_y)
+     call reconstruct_ppm(nx,ny,mom_x_2,mom_x_left_x,mom_x_right_x,mom_x_left_y,mom_x_right_y)
+     call reconstruct_ppm(nx,ny,mom_y_2,mom_y_left_x,mom_y_right_x,mom_y_left_y,mom_y_right_y)
   else if (recons .eq. 0) then
 !     print*, 'using minmod!'
      call reconstruct(nx,ny,rho,rho_left_x,rho_right_x,rho_left_y,rho_right_y)
      call reconstruct(nx,ny,tau,tau_left_x,tau_right_x,tau_left_y,tau_right_y)
      call reconstruct(nx,ny,etot,etot_left_x,etot_right_x,etot_left_y,etot_right_y)
-     call reconstruct(nx,ny,mom_A,mom_A_left_x,mom_A_right_x,mom_A_left_y,mom_A_right_y)
-     call reconstruct(nx,ny,mom_B,mom_B_left_x,mom_B_right_x,mom_B_left_y,mom_B_right_y)
-     call reconstruct(nx,ny,mom_x,mom_x_left_x,mom_x_right_x,mom_x_left_y,mom_x_right_y)
-     call reconstruct(nx,ny,mom_y,mom_y_left_x,mom_y_right_x,mom_y_left_y,mom_y_right_y)
+     call reconstruct(nx,ny,mom_A_2,mom_A_left_x,mom_A_right_x,mom_A_left_y,mom_A_right_y)
+     call reconstruct(nx,ny,mom_B_2,mom_B_left_x,mom_B_right_x,mom_B_left_y,mom_B_right_y)
+     call reconstruct(nx,ny,mom_x_2,mom_x_left_x,mom_x_right_x,mom_x_left_y,mom_x_right_y)
+     call reconstruct(nx,ny,mom_y_2,mom_y_left_x,mom_y_right_x,mom_y_left_y,mom_y_right_y)
   else
      print*, 'error invalid reconstruction!'
      call exit(1)
   end if
 
-
-  !multiplying reconstructed values by rho to return to conserved variables
-!!$  tau_left_x = tau_left_x*rho_left_x
-!!$  tau_right_x = tau_right_x*rho_right_x
-!!$  tau_left_y = tau_left_y*rho_left_y
-!!$  tau_right_y = tau_right_y*rho_right_y
-!!$
-!!$  etot_left_x = etot_left_x*rho_left_x
-!!$  etot_right_x = etot_right_x*rho_right_x
-!!$  etot_left_y = etot_left_y*rho_left_y
-!!$  etot_right_y = etot_right_y*rho_right_y
-!!$
-  mom_A_left_x = mom_A_left_x*rho_left_x
-  mom_A_right_x = mom_A_right_x*rho_right_x
-  mom_A_left_y = mom_A_left_y*rho_left_y
-  mom_A_right_y = mom_A_right_y*rho_right_y
-
-  mom_B_left_x = mom_B_left_x*rho_left_x
-  mom_B_right_x = mom_B_right_x*rho_right_x
-  mom_B_left_y = mom_B_left_y*rho_left_y
-  mom_B_right_y = mom_B_right_y*rho_right_y
-
-  mom_x_left_x = mom_x_left_x*rho_left_x
-  mom_x_right_x = mom_x_right_x*rho_right_x
-  mom_x_left_y = mom_x_left_y*rho_left_y
-  mom_x_right_y = mom_x_right_y*rho_right_y
-
-  mom_y_left_x = mom_y_left_x*rho_left_x
-  mom_y_right_x = mom_y_right_x*rho_right_x
-  mom_y_left_y = mom_y_left_y*rho_left_y
-  mom_y_right_y = mom_y_right_y*rho_right_y
-  
-
-!  call reconstruct(nx,ny,x,x_left_x,x_right_x,x_left_y,x_right_y)
-!  call reconstruct(nx,ny,y,y_left_x,y_right_x,y_left_y,y_right_y)
-!  call reconstruct(nx,ny,phi,phi_left_x,phi_right_x,phi_left_y,phi_right_y)
 
   
   do j=2,ny
@@ -120,6 +88,40 @@ subroutine grid_reconstruct(nx,ny,rho_floor,&
      y_left_y(i,j) = ( y(i,j) + y(i,j) )/2d0
      y_right_y(i,j) = ( y(i,j) + y(i,j) )/2d0
   end do
+
+  !multiplying reconstructed values by rho to return to conserved variables
+
+  mom_A_left_x = mom_A_left_x*rho_left_x
+  mom_A_right_x = mom_A_right_x*rho_right_x
+  mom_A_left_y = mom_A_left_y*rho_left_y
+  mom_A_right_y = mom_A_right_y*rho_right_y
+
+
+  call getrtheta(nx,ny,x_left_x,y_left_x,r_left_x,theta)
+  call getrtheta(nx,ny,x_right_x,y_right_x,r_right_x,theta)
+  call getrtheta(nx,ny,x_left_y,y_left_y,r_left_y,theta)
+  call getrtheta(nx,ny,x_right_y,y_right_y,r_right_y,theta)
+
+  mom_B_left_x  = mom_B_left_x  * rho_left_x  * r_left_x
+  mom_B_right_x = mom_B_right_x * rho_right_x * r_right_x
+  mom_B_left_y  = mom_B_left_y  * rho_left_y  * r_left_y
+  mom_B_right_y = mom_B_right_y * rho_right_y * r_right_y
+
+  mom_x_left_x = mom_x_left_x*rho_left_x
+  mom_x_right_x = mom_x_right_x*rho_right_x
+  mom_x_left_y = mom_x_left_y*rho_left_y
+  mom_x_right_y = mom_x_right_y*rho_right_y
+
+  mom_y_left_x = mom_y_left_x*rho_left_x
+  mom_y_right_x = mom_y_right_x*rho_right_x
+  mom_y_left_y = mom_y_left_y*rho_left_y
+  mom_y_right_y = mom_y_right_y*rho_right_y
+
+
+!  call reconstruct(nx,ny,x,x_left_x,x_right_x,x_left_y,x_right_y)
+!  call reconstruct(nx,ny,y,y_left_x,y_right_x,y_left_y,y_right_y)
+!  call reconstruct(nx,ny,phi,phi_left_x,phi_right_x,phi_left_y,phi_right_y)
+
   
   !density floor
  !!!! !$OMP PARALLEL DO PRIVATE(i,j)
