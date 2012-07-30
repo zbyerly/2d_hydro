@@ -1,5 +1,5 @@
 
-subroutine reconstruct_ppm(nx,ny,u,u_left_x,u_right_x,u_left_y,u_right_y)
+subroutine reconstruct_ppm(nx,ny,u,u_right_x,u_left_x,u_right_y,u_left_y)
   implicit none
 
   double precision :: u(nx,ny)
