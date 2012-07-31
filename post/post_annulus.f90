@@ -153,11 +153,11 @@ do timeint=0,100000,1
      do j=1,ny
         do i=1,nx
            read(10,*) x(i,j), y(i,j), rho(i,j)
-           read(11,*) x(i,j), y(i,j), mom_A(i,j)
-           read(12,*) x(i,j), y(i,j), mom_B(i,j)
-           read(13,*) x(i,j), y(i,j), mom_x(i,j)
-           read(14,*) x(i,j), y(i,j), mom_y(i,j)                      
-           read(15,*) x(i,j), y(i,j), etot(i,j)
+!!$           read(11,*) x(i,j), y(i,j), mom_A(i,j)
+!!$           read(12,*) x(i,j), y(i,j), mom_B(i,j)
+!!$           read(13,*) x(i,j), y(i,j), mom_x(i,j)
+!!$           read(14,*) x(i,j), y(i,j), mom_y(i,j)                      
+!!$           read(15,*) x(i,j), y(i,j), etot(i,j)
 !           read(16,*) x(i,j), y(i,j), tau(i,j)
 
            r(i,j) = sqrt(x(i,j)*x(i,j) + y(i,j)*y(i,j))
