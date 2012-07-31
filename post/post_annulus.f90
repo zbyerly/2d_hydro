@@ -87,20 +87,20 @@ do timeint=0,100000,1
      write(filename,'(A10,i7.7,A4)') './data/rho',timeint,'.dat'
      open(10,FILE=filename,status="old")
 
-     write(filename,'(A12,i7.7,A4)') './data/mom_A',timeint,'.dat'
-     open(11,FILE=filename,status="old")
-
-     write(filename,'(A12,i7.7,A4)') './data/mom_B',timeint,'.dat'
-     open(12,FILE=filename,status="old")
-
-     write(filename,'(A12,i7.7,A4)') './data/mom_x',timeint,'.dat'
-     open(13,FILE=filename,status="old")
-
-     write(filename,'(A12,i7.7,A4)') './data/mom_y',timeint,'.dat'
-     open(14,FILE=filename,status="old")
-
-     write(filename,'(A11,i7.7,A4)') './data/etot',timeint,'.dat'
-     open(15,FILE=filename,status="old")
+!!$     write(filename,'(A12,i7.7,A4)') './data/mom_A',timeint,'.dat'
+!!$     open(11,FILE=filename,status="old")
+!!$
+!!$     write(filename,'(A12,i7.7,A4)') './data/mom_B',timeint,'.dat'
+!!$     open(12,FILE=filename,status="old")
+!!$
+!!$     write(filename,'(A12,i7.7,A4)') './data/mom_x',timeint,'.dat'
+!!$     open(13,FILE=filename,status="old")
+!!$
+!!$     write(filename,'(A12,i7.7,A4)') './data/mom_y',timeint,'.dat'
+!!$     open(14,FILE=filename,status="old")
+!!$
+!!$     write(filename,'(A11,i7.7,A4)') './data/etot',timeint,'.dat'
+!!$     open(15,FILE=filename,status="old")
 
 
 !     write(filename,'(A11,i7.7,A4)') './data/etot',timeint,'.dat'
@@ -237,10 +237,10 @@ do timeint=0,100000,1
 
      !close the data files
      close(10)           
-     close(11)           
-     close(12)           
-     close(13)           
-     close(14)
+!!$     close(11)           
+!!$     close(12)           
+!!$     close(13)           
+!!$     close(14)
 
 
         
