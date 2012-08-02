@@ -87,20 +87,20 @@ do timeint=0,100000,1
      write(filename,'(A10,i7.7,A4)') './data/rho',timeint,'.dat'
      open(10,FILE=filename,status="old")
 
-     write(filename,'(A12,i7.7,A4)') './data/mom_A',timeint,'.dat'
-     open(11,FILE=filename,status="old")
-
-     write(filename,'(A12,i7.7,A4)') './data/mom_B',timeint,'.dat'
-     open(12,FILE=filename,status="old")
-
-     write(filename,'(A12,i7.7,A4)') './data/mom_x',timeint,'.dat'
-     open(13,FILE=filename,status="old")
-
-     write(filename,'(A12,i7.7,A4)') './data/mom_y',timeint,'.dat'
-     open(14,FILE=filename,status="old")
-
-     write(filename,'(A11,i7.7,A4)') './data/etot',timeint,'.dat'
-     open(15,FILE=filename,status="old")
+!!$     write(filename,'(A12,i7.7,A4)') './data/mom_A',timeint,'.dat'
+!!$     open(11,FILE=filename,status="old")
+!!$
+!!$     write(filename,'(A12,i7.7,A4)') './data/mom_B',timeint,'.dat'
+!!$     open(12,FILE=filename,status="old")
+!!$
+!!$     write(filename,'(A12,i7.7,A4)') './data/mom_x',timeint,'.dat'
+!!$     open(13,FILE=filename,status="old")
+!!$
+!!$     write(filename,'(A12,i7.7,A4)') './data/mom_y',timeint,'.dat'
+!!$     open(14,FILE=filename,status="old")
+!!$
+!!$     write(filename,'(A11,i7.7,A4)') './data/etot',timeint,'.dat'
+!!$     open(15,FILE=filename,status="old")
 
 
 !     write(filename,'(A11,i7.7,A4)') './data/etot',timeint,'.dat'
@@ -153,11 +153,11 @@ do timeint=0,100000,1
      do j=1,ny
         do i=1,nx
            read(10,*) x(i,j), y(i,j), rho(i,j)
-           read(11,*) x(i,j), y(i,j), mom_A(i,j)
-           read(12,*) x(i,j), y(i,j), mom_B(i,j)
-           read(13,*) x(i,j), y(i,j), mom_x(i,j)
-           read(14,*) x(i,j), y(i,j), mom_y(i,j)                      
-           read(15,*) x(i,j), y(i,j), etot(i,j)
+!!$           read(11,*) x(i,j), y(i,j), mom_A(i,j)
+!!$           read(12,*) x(i,j), y(i,j), mom_B(i,j)
+!!$           read(13,*) x(i,j), y(i,j), mom_x(i,j)
+!!$           read(14,*) x(i,j), y(i,j), mom_y(i,j)                      
+!!$           read(15,*) x(i,j), y(i,j), etot(i,j)
 !           read(16,*) x(i,j), y(i,j), tau(i,j)
 
            r(i,j) = sqrt(x(i,j)*x(i,j) + y(i,j)*y(i,j))
@@ -237,10 +237,10 @@ do timeint=0,100000,1
 
      !close the data files
      close(10)           
-     close(11)           
-     close(12)           
-     close(13)           
-     close(14)
+!!$     close(11)           
+!!$     close(12)           
+!!$     close(13)           
+!!$     close(14)
 
 
         
