@@ -84,19 +84,19 @@ subroutine RK_substep(nx,ny,dx,dy,kappa,gamma,dt,beta,rho_floor,&
 !  end if
 
   ! floor everything within a certain radius
-!!$  do j=1,ny
-!!$     do i=1,nx
-!!$        r_here = dsqrt(x(i,j)**2d0+y(i,j)**2d0)
-!!$        
-!!$        if (r_here .lt. 4.743d-5) then
-!!$           rho(i,j) = rho_floor
-!!$           mom_A(i,j) = 0d0
-!!$           mom_B(i,j) = 0d0
-!!$           mom_x(i,j) = 0d0
-!!$           mom_y(i,j) = 0d0
-!!$           etot(i,j) = rho_floor           
-!!$        end if
-!!$     end do
-!!$  end do
+  do j=1,ny
+     do i=1,nx
+        r_here = dsqrt(x(i,j)**2d0+y(i,j)**2d0)
+        
+        if (r_here .lt. 1d-5) then
+           rho(i,j) = rho_floor
+           mom_A(i,j) = 0d0
+           mom_B(i,j) = 0d0
+           mom_x(i,j) = 0d0
+           mom_y(i,j) = 0d0
+           etot(i,j) = rho_floor           
+        end if
+     end do
+  end do
 
 end subroutine RK_substep
