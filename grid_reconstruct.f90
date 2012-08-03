@@ -20,7 +20,7 @@ subroutine grid_reconstruct(nx,ny,rho_floor,&
 
   !divide conserved quantities by rho
   mom_A_2=mom_A/rho
-  mom_B_2=mom_B/rho/r
+  mom_B_2=mom_B/rho
   mom_x_2=mom_x/rho
   mom_y_2=mom_y/rho
 
@@ -102,10 +102,14 @@ subroutine grid_reconstruct(nx,ny,rho_floor,&
   call getrtheta(nx,ny,x_left_y,y_left_y,r_left_y,theta)
   call getrtheta(nx,ny,x_right_y,y_right_y,r_right_y,theta)
 
-  mom_B_left_x  = mom_B_left_x  * rho_left_x  * r_left_x
-  mom_B_right_x = mom_B_right_x * rho_right_x * r_right_x
-  mom_B_left_y  = mom_B_left_y  * rho_left_y  * r_left_y
-  mom_B_right_y = mom_B_right_y * rho_right_y * r_right_y
+  mom_B_left_x  = mom_B_left_x  * rho_left_x 
+  mom_B_right_x = mom_B_right_x * rho_right_x
+  mom_B_left_y  = mom_B_left_y  * rho_left_y 
+  mom_B_right_y = mom_B_right_y * rho_right_y
+!!$  mom_B_left_x  = mom_B_left_x  * rho_left_x  * r_left_x
+!!$  mom_B_right_x = mom_B_right_x * rho_right_x * r_right_x
+!!$  mom_B_left_y  = mom_B_left_y  * rho_left_y  * r_left_y
+!!$  mom_B_right_y = mom_B_right_y * rho_right_y * r_right_y
 
   mom_x_left_x = mom_x_left_x*rho_left_x
   mom_x_right_x = mom_x_right_x*rho_right_x
