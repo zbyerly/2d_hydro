@@ -18,7 +18,8 @@ subroutine radial_initial_annulus(n,dr,rho,phi,omega,omega_k)
 
   dr = rmax/dble(n)
 
-  eps = 0.133d0
+!  eps = 0.133d0
+  eps = 0.4d0
   q = 2d0
   r_0 = 9.486d-5
   a = r_0*eps
