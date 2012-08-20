@@ -22,9 +22,9 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
 !  output_freq = 1d-1
 
   !output freq for annulus
-  output_freq = 2d0*pi/omega_grid/1d2
+  output_freq = 6.28318530718d0/omega_grid/1d2
   outcount = 0
-  
+  print*,'output_freq=',output_freq
 
 ! defining mom_x,mom_y from mom_A,mom_B 
   call mom_cyl2cart(nx,ny,mom_A,mom_B,mom_x,mom_y,x,y)
