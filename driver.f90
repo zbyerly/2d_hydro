@@ -21,9 +21,8 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
   !output frequency for rotating polytrope:
 !  output_freq = 1d-1
 
-  !output freq for annulus, 1 rotation = 4.147d-5
-  output_freq = 4.147d-7
-!  output_freq = 4.147d-8
+  !output freq for annulus
+  output_freq = 2d0*pi/omega_grid/1d2
   outcount = 0
   
 

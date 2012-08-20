@@ -1,8 +1,8 @@
 program post
   implicit none
   
-  integer, parameter :: nx = 200
-  integer, parameter :: ny = 200
+  integer, parameter :: nx = 800
+  integer, parameter :: ny = 800
   integer, parameter :: rbins = 100
   integer, parameter :: n_theta = 128
   integer :: i,j,k
@@ -209,9 +209,11 @@ do timeint=0,100000,1
 
      do i=1,n_theta
         transform(i) = 0d0
+        transform2(i) = 0d0
         arg = 2d0*pi/dble(n_theta)
         do j=1,n_theta 
            transform(i) = transform(i) + rho_theta(j)*( cos( arg*(i-1)*(j-1) ) ) 
+           transform2(i) = transform2(i) - rho_theta(j)*( sin( arg*(i-1)*(j-1) ) )
         end do
         transform(i) = transform(i)/dble(n_theta)
      end do
