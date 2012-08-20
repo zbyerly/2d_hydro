@@ -94,6 +94,5 @@ subroutine radial_initial_annulus(n,dr,rho,phi,omega,omega_k)
   end do
   close(15)
     
-  call exit(0)
 
 end subroutine radial_initial_annulus
