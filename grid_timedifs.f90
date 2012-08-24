@@ -23,6 +23,7 @@ subroutine grid_timedifs(nx,ny,gamma,dx,dy,&
   double precision :: delta_mom_X1(nx,ny),delta_mom_Y1(nx,ny)
   double precision :: omega_grid
 
+  double precision :: temp1(nx,ny),temp2(nx,ny),temp3(nx,ny),temp4(nx,ny)
 
   delta_rho = 0d0
   delta_tau = 0d0
@@ -169,6 +170,18 @@ subroutine grid_timedifs(nx,ny,gamma,dx,dy,&
 
   call getrtheta(nx,ny,x,y,r,theta)
 
+!  temp1 = -0.5d0*r*omega_grid**2d0
+!  temp2 = 0d0
+
+!  call mom_cyl2cart(nx,ny,temp1,temp2,temp3,temp4,x,y)
+
+!  do j=1,ny
+!     do i=1,nx
+!        write(98,*) i, j, temp1(i,j),temp4(i,j)
+!     end do
+!  end do
+!  call exit(0)
+
   !$OMP PARALLEL DO PRIVATE(i,j)
   do j=1,ny
      do i=1,nx
@@ -183,6 +196,11 @@ subroutine grid_timedifs(nx,ny,gamma,dx,dy,&
            delta_mom_A(i,j) = delta_mom_A(i,j) + rho(i,j)*( (mom_B(i,j)/rho(i,j))**2d0 )/( r(i,j)**3d0 )
 
 !           delta_mom_B(i,j) = delta_mom_B(i,j) - rho(i,j)*( (-y(i,j)*v_x(i,j)+x(i,j)*v_y(i,j))*(x(i,j)*v_x(i,j)+y(i,j)*v_y(i,j)) )/( r(i,j)**3d0)
+
+           if (omega_grid .gt. 1d-9) then
+              delta_mom_X(i,j) = delta_mom_X(i,j) - omega_grid*mom_Y(i,j)
+              delta_mom_Y(i,j) = delta_mom_Y(i,j) + omega_grid*mom_X(i,j)
+           end if
 
      end do
   end do

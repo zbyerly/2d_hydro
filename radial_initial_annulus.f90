@@ -25,15 +25,15 @@ subroutine radial_initial_annulus(n,dr,rho,phi,omega,omega_k)
   !assuming q=2
 
   eps = 0.133d0
-!  eps = 0.9d0
+!  eps = 0.4d0
   r_outer = 1.0747d-4
   r_inner = r_outer*(1d0-eps)/(1d0+eps)
   print*,'r_outer=',r_outer
   print*,'r_inner=',r_inner
 
 
-  if (r_inner .lt. 0d0) then
-     print*,'r_inner less than zero!'
+  if (r_inner .lt. 1d-5) then
+     print*,'r_inner less than minimum!'
   end if
   
   C_2 = sqrt(2d0*G*M_c*R_inner*R_outer/(R_inner+R_outer))
