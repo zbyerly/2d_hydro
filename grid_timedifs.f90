@@ -198,8 +198,8 @@ subroutine grid_timedifs(nx,ny,gamma,dx,dy,&
 !           delta_mom_B(i,j) = delta_mom_B(i,j) - rho(i,j)*( (-y(i,j)*v_x(i,j)+x(i,j)*v_y(i,j))*(x(i,j)*v_x(i,j)+y(i,j)*v_y(i,j)) )/( r(i,j)**3d0)
 
            if (omega_grid .gt. 1d-9) then
-              delta_mom_X(i,j) = delta_mom_X(i,j) - omega_grid*mom_Y(i,j)
-              delta_mom_Y(i,j) = delta_mom_Y(i,j) + omega_grid*mom_X(i,j)
+              delta_mom_X(i,j) = delta_mom_X(i,j) + omega_grid*mom_Y(i,j)
+              delta_mom_Y(i,j) = delta_mom_Y(i,j) - omega_grid*mom_X(i,j)
            end if
 
      end do

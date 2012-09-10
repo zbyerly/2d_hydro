@@ -37,20 +37,20 @@ subroutine output(nx,ny,rho,x,y,timestep,timeint,gamma,&
 !     write(filename,'(A16,i7.7,A4)') './data/mom_theta',timeint,'.dat'
 !     open(11,FILE=filename)
 
-     write(filename,'(A12,i7.7,A4)') './data/mom_A',timeint,'.dat'
-     open(12,FILE=filename)
+!     write(filename,'(A12,i7.7,A4)') './data/mom_A',timeint,'.dat'
+!     open(12,FILE=filename)
 
-     write(filename,'(A12,i7.7,A4)') './data/mom_B',timeint,'.dat'
-     open(13,FILE=filename)
+!     write(filename,'(A12,i7.7,A4)') './data/mom_B',timeint,'.dat'
+!     open(13,FILE=filename)
 
 !     write(filename,'(A11,i7.7,A4)') './data/etot',timeint,'.dat'
 !     open(14,FILE=filename)
 
-     write(filename,'(A12,i7.7,A4)') './data/mom_x',timeint,'.dat'
-     open(15,FILE=filename)
+!     write(filename,'(A12,i7.7,A4)') './data/mom_x',timeint,'.dat'
+!     open(15,FILE=filename)
 
-     write(filename,'(A12,i7.7,A4)') './data/mom_y',timeint,'.dat'
-     open(16,FILE=filename)
+!     write(filename,'(A12,i7.7,A4)') './data/mom_y',timeint,'.dat'
+!     open(16,FILE=filename)
 
 !     write(filename,'(A11,i7.7,A4)') './data/pres',timeint,'.dat'
 !     open(17,FILE=filename)
@@ -76,11 +76,11 @@ subroutine output(nx,ny,rho,x,y,timestep,timeint,gamma,&
 !           write(11,*) x(i,j), y(i,j), rho(i,j) - solution_rho(j)
 !           write(11,*) x(i,j), y(i,j), etot(i,j)
 !           write(12,*) x(i,j), y(i,j), mom_theta(i,j)/(rho(i,j)*(x(i,j)*x(i,j)+y(i,j)*y(i,j)))
-           write(12,*) x(i,j), y(i,j), mom_A(i,j)
-           write(13,*) x(i,j), y(i,j), mom_B(i,j)
-           write(14,*) x(i,j), y(i,j), etot(i,j)
-           write(15,*) x(i,j), y(i,j), mom_x(i,j)
-           write(16,*) x(i,j), y(i,j), mom_y(i,j)
+!           write(12,*) x(i,j), y(i,j), mom_A(i,j)
+!           write(13,*) x(i,j), y(i,j), mom_B(i,j)
+!           write(14,*) x(i,j), y(i,j), etot(i,j)
+!           write(15,*) x(i,j), y(i,j), mom_x(i,j)
+!           write(16,*) x(i,j), y(i,j), mom_y(i,j)
 !           write(17,*) x(i,j), y(i,j), pressure(i,j)
 !           write(18,*) x(i,j), y(i,j), tau(i,j)
 !           write(19,*) x(i,j), y(i,j), mom_r(i,j)
@@ -91,11 +91,11 @@ subroutine output(nx,ny,rho,x,y,timestep,timeint,gamma,&
 
      close(10)           
 !     close(11)           
-     close(12)           
-     close(13)           
-     close(14)           
-     close(15)           
-     close(16)           
+!     close(12)           
+!     close(13)           
+!     close(14)           
+!     close(15)           
+!     close(16)           
 !     close(17)           
 !     close(18)           
 !     close(19)           

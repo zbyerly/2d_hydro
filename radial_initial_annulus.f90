@@ -24,8 +24,8 @@ subroutine radial_initial_annulus(n,dr,rho,phi,omega,omega_k)
 
   !assuming q=2
 
-  eps = 0.133d0
-!  eps = 0.4d0
+!  eps = 0.133d0
+  eps = 0.4d0
   r_outer = 1.0747d-4
   r_inner = r_outer*(1d0-eps)/(1d0+eps)
   print*,'r_outer=',r_outer

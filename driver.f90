@@ -23,6 +23,7 @@ subroutine driver(nx,ny,dx,dy,kappa,gamma,cfl_factor,endtime,rho_floor,&
 
   !output freq for annulus
   output_freq = 6.28318530718d0/omega_grid/1d2
+!  output_freq = 6.28318530718d0/omega_grid/1d6
   outcount = 0
   print*,'output_freq=',output_freq
 

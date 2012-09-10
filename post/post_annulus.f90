@@ -1,8 +1,8 @@
 program post
   implicit none
   
-  integer, parameter :: nx = 800
-  integer, parameter :: ny = 800
+  integer, parameter :: nx = 200
+  integer, parameter :: ny = 200
   integer, parameter :: rbins = 100
   integer, parameter :: n_theta = 128
   integer :: i,j,k
@@ -39,8 +39,9 @@ program post
   double precision :: theta_here, x_here, y_here,r_0
   integer :: i_minus,i_plus,j_minus,j_plus
 
-  double precision :: total_mom_B,rho_here,transform(n_theta)
+  double precision :: total_mom_B,rho_here
 
+  double precision :: fr(n_theta),fi(n_theta),gr(n_theta),gi(n_theta)
 
 !  double precision :: M_1,M_2,M_3,J_1,J_2,J_3
 
@@ -207,23 +208,21 @@ do timeint=0,100000,1
 
      end do
 
-     do i=1,n_theta
-        transform(i) = 0d0
-        transform2(i) = 0d0
-        arg = 2d0*pi/dble(n_theta)
-        do j=1,n_theta 
-           transform(i) = transform(i) + rho_theta(j)*( cos( arg*(i-1)*(j-1) ) ) 
-           transform2(i) = transform2(i) - rho_theta(j)*( sin( arg*(i-1)*(j-1) ) )
-        end do
-        transform(i) = transform(i)/dble(n_theta)
+     do k=1,n_theta
+        fr(k) = rho_theta(k)
+        fi(k) = 0d0
+        gi(k) = 0d0
+        gr(k) = 0d0
      end do
+     
+     call transform(fr,fi,gr,gi,n_theta)
+     
 
-
-     write(31,*) timeint, transform(1)
-     write(32,*) timeint, transform(2)/transform(1)
-     write(33,*) timeint, transform(3)/transform(1)
-     write(34,*) timeint, transform(4)/transform(1)
-     write(35,*) timeint, transform(5)/transform(1)
+!     write(31,*) timeint, 
+     write(32,*) timeint, sqrt( (gr(2)**2d0+gi(2)**2d0) / (gr(1)**2d0+gi(1)**2d0) )
+     write(33,*) timeint, sqrt( (gr(3)**2d0+gi(3)**2d0) / (gr(1)**2d0+gi(1)**2d0) )
+     write(34,*) timeint, sqrt( (gr(4)**2d0+gi(4)**2d0) / (gr(1)**2d0+gi(1)**2d0) )
+     write(35,*) timeint, sqrt( (gr(5)**2d0+gi(5)**2d0) / (gr(1)**2d0+gi(1)**2d0) )
      
 
 
@@ -307,3 +306,68 @@ do timeint=0,100000,1
   close(35)
 
 end program post
+subroutine transform(FR,FI,GR,GI,N)
+  implicit none
+
+  double precision, intent(in) :: FR(N),FI(N)
+  double precision :: GR(N),GI(N)
+  double precision :: f0,h
+  integer :: i,n
+
+  f0=1d0/sqrt(dble(n))
+  h=1d0/dble(n-1)
+
+  call dft(fr,fi,gr,gi,n)
+
+  do i=1,n
+     gr(i)=f0*gr(i)
+     gi(i)=f0*gi(i)
+  end do
+
+end subroutine transform
+
+subroutine inverse(FR,FI,GR,GI,N)
+  implicit none
+  
+  double precision :: FR(N),FI(N)
+  double precision, intent(in) :: GR(N),GI(N)
+  double precision :: f0,h
+  integer :: i,n
+
+  double precision :: gi2(n)
+
+  f0=1d0/sqrt(dble(n))
+  h=1d0/dble(n-1)
+
+  do i=1,n
+     gi2(i)=-gi(i)
+  end do
+
+  call dft(gr,gi2,fr,fi,n)
+
+  do i=1,n
+     fr(i) = f0*fr(i)
+     fi(i) = -f0*fi(i)
+  end do
+
+end subroutine inverse
+
+SUBROUTINE dft(FR,FI,GR,GI,N) 
+  implicit none
+  double precision :: FR(N),FI(N),GR(N),GI(N)
+  double precision :: pi,x,q
+  integer :: i,j,n
+
+  PI = 4.0*ATAN(1.0)
+  X  = 2*PI/N
+  DO I = 1, N
+     GR(I) = 0.0
+     GI(I) = 0.0
+     DO  J = 1, N
+        Q     = X*(J-1)*(I-1)
+        GR(I) = GR(I) + FR(J)*COS(Q) + FI(J)*SIN(Q)
+        GI(I) = GI(I) + FI(J)*COS(Q) - FR(J)*SIN(Q)
+     end DO
+  end DO
+  RETURN
+END SUBROUTINE DFT
