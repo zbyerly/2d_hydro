@@ -19,6 +19,8 @@ subroutine output(nx,ny,rho,x,y,timestep,timeint,gamma,&
 
   character filename*40  
 
+
+  ! this is a comment
   
   call velocity(nx,ny,mom_x,mom_y,rho,v_x,v_y,omega_grid,x,y)
 
